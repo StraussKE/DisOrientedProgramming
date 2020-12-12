@@ -23,6 +23,14 @@ namespace DisOrientedProgramming.Data
             // replace with actual DbSets
         //public DbSet<Meeting> Meetings { get; set; }
 
+        public DbSet<ForumPost> forumPosts { get; set; }
+        public DbSet<ForumTopic> forumTopics { get; set; }
+        public DbSet<AppUser> appUsers { get; set; }
+
+        public DbSet<SurveyModel> surveyModels { get; set; }
+
+        public DbSet<ResourceLink> resourceLinks { get; set; }
+
             // if many to many bridges required
         /* protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
