@@ -20,6 +20,6 @@ namespace DisOrientedProgramming.Models
         public virtual ForumPost ParentPost { get; set; }
 
         //this is used to track responses
-        public List<ForumPost> Responses { get; set; }
+        public virtual List<ForumPost> Responses { get; set; }
     }
 }
