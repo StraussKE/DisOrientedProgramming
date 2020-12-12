@@ -28,6 +28,20 @@ namespace DisOrientedProgramming.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Index(ForumPost usersPost)
+        {
+            ForumTopic topic = _context.ForumTopics.Where(f =>f.Name == usersPost.Topic.Name).FirstOrDefault();
+
+            usersPost.Topic = topic;
+
+            _context.ForumPosts.Add(usersPost);
+            _context.SaveChanges();
+
+            return RedirectToAction("Topic", new { t = usersPost.Topic.ForumTopicId, Area = "" });
+
+        }
+
         public IActionResult Topic(Guid t)
         {
             ForumTopic topic = _context.ForumTopics.First(Topic => Topic.ForumTopicId == t);
