@@ -24,15 +24,28 @@ namespace DisOrientedProgramming.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Topics = _context.ForumTopics.ToList();
             return View();
         }
+
+        public IActionResult Topic(Guid t)
+        {
+            ForumTopic topic = _context.ForumTopics.First(Topic => Topic.ForumTopicId == t);
+            ViewBag.Topic = topic.Name;
+            ViewBag.Posts = _context.ForumPosts.Where(post => post.Topic == topic).ToList();
+            return View();
+        }
+
 
         public async Task<IActionResult> ViewThread(Guid startPost) // thread head
         {
             // only the posts that go in this thread
             var postList = await _context.ForumPosts.Where(post => post.ParentPost.ForumPostId == startPost).ToListAsync();
 
+            //TODO: That :
             // then display posts and lists like a tree/graph wee!!!
+
+            return null;
         }
     }
 }
