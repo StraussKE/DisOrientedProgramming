@@ -1,0 +1,25 @@
+﻿@model List<DisOrientedProgramming.Models.ResourceLink>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Related Links";
+}
+
+<!DOCTYPE ="html">
+
+<html>
+
+<body>
+    <div class="panel-body">
+        <table class="table table-sm table-striped table-bordered">
+            <tbody>
+                @foreach (DisOrientedProgramming.Models.ResourceLink l in Model)
+                {
+                    <tr>
+                        <td><a href="@l.Address">@l.ResourceName</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
