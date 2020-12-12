@@ -7,7 +7,11 @@ namespace DisOrientedProgramming.Models
 {
     public class ResourceLink
     {
+        public Guid ResourceId { get; set; }
+
         public string ResourceName { get; set; }
+
+        public string ResourceType { get; set; }
 
         public Uri Address { get; set; }
 
