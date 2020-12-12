@@ -52,7 +52,7 @@ namespace DisOrientedProgramming.Data
             RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             //Set Roles that will not be changed
-            string[] roleNames = { "Admins", "MeetingHost", "Member" };
+            string[] roleNames = { "Admin", "Moderator", "Member" };
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)

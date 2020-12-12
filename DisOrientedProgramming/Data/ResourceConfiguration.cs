@@ -26,7 +26,7 @@ namespace DisOrientedProgramming.Data
                     ResourceLinkId = Guid.NewGuid(),
                     ResourceName = "Google",
                     ResourceType = "test",
-                    Address = new Uri("www.google.com"),
+                    Address = new Uri("http://www.google.com"),
                     Description = "Search engine!!!!"
                 },
                 new ResourceLink
@@ -34,7 +34,7 @@ namespace DisOrientedProgramming.Data
                     ResourceLinkId = Guid.NewGuid(),
                     ResourceName = "Lane Main",
                     ResourceType = "test",
-                    Address = new Uri("www.lanecc.edu"),
+                    Address = new Uri("http://www.lanecc.edu"),
                     Description = "LCC home page"
                 }
             );

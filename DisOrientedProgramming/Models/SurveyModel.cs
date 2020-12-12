@@ -3,9 +3,7 @@ namespace DisOrientedProgramming.Models
 {
     public class SurveyModel
     {
-        public SurveyModel()
-        {
-        }
+        public Guid SurveyModelId { get; set; }
 
         public AppUser User { get; set; }
 
