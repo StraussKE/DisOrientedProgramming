@@ -29,7 +29,7 @@ namespace DisOrientedProgramming.Controllers
 
             ViewBag.PhysicalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Physical Health").ToListAsync();
 
-            
+
 
             return View();
         }
@@ -37,7 +37,7 @@ namespace DisOrientedProgramming.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 ResourceLink resource = new ResourceLink
                 {
                     ResourceLinkId = Guid.NewGuid(),
@@ -47,17 +47,17 @@ namespace DisOrientedProgramming.Controllers
 
                 _context.Add(resource);
                 await _context.SaveChangesAsync().ConfigureAwait(true);
-                return RedirectToAction("Index", new { id = resource.ResourceLinkId);
-            
-        }
-            return View();
-
+                return RedirectToAction("Index", new { id = resource.ResourceLinkId });
             }
 
+            return View();
 
         }
     }
 }
+
+
+   
 
     
 
