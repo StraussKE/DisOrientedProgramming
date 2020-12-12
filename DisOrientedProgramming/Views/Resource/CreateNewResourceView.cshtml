@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ResourceViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Related Links";
+}
+
+
+
+    <h1>Create</h1>
+
+    <h4>Meeting</h4>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" enctype="multipart/form-data"></form>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group"></div>
+            <label asp-for="ResourceName" class="control-label"><</label>
+            <input asp-for="ResourceName" class="form-control" />
+            <span asp-validation-for="ResourceName" class="text-danger"></span>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group"></div>
+            <label asp-for="ResourceType" class="control-label"><</label>
+            <input asp-for="ResourceType" class="form-control" />
+            <span asp-validation-for="ResourceType" class="text-danger"></span>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group"></div>
+        <label asp-for="Address" class="control-label"><</label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+  
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group"></div>
+        <label asp-for="Address" class="control-label"><</label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>

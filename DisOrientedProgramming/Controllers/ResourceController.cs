@@ -23,20 +23,42 @@ namespace DisOrientedProgramming.Controllers
         }
 
         public async Task<IActionResult> Index()
-        { 
-            
-            ViewBag.MentalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "mental health").ToListAsync();
+        {
 
-            ViewBag.PhysicalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "physical health").ToListAsync();
+            ViewBag.MentalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Mental Health").ToListAsync();
+
+            ViewBag.PhysicalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Physical Health").ToListAsync();
+
+            
 
             return View();
         }
-        
-        /*public IActionResult LinkList()
+        public async Task<IActionResult> Create(ResourceLink model)
         {
-            List<Link> links = LinkRepository.Links;
-            links.Sorts(l1, l2) 
-        */
+            if (ModelState.IsValid)
+            {
+                
+                ResourceLink resource = new ResourceLink
+                {
+                    ResourceLinkId = Guid.NewGuid(),
+                    ResourceName = model.ResourceName,
+                    ResourceType = model.ResourceType,
+                };
+
+                _context.Add(resource);
+                await _context.SaveChangesAsync().ConfigureAwait(true);
+                return RedirectToAction("Index", new { id = resource.ResourceLinkId);
+            
+        }
+            return View();
+
+            }
+
+
         }
     }
+}
+
+    
+
 

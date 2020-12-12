@@ -4,22 +4,63 @@
     ViewData["Title"] = "Related Links";
 }
 
-<!DOCTYPE = "html">
 
 <html>
 
 <body>
+
+    <!-- Mental health links table -->
+
     <div class="panel-body">
         <table class="table table-sm table-striped table-bordered">
+
+            <thead>
+                <!-- header row table column names auto bold -->
+                <tr>
+
+                    <th> Mental Wellness Resources</th>
+                </tr>
+            </thead>
             <tbody>
-                @foreach (DisOrientedProgramming.Models.ResourceLink l in Model)
+                @foreach (DisOrientedProgramming.Models.ResourceLink l in ViewBag.MentalHealth)
                 {
-                    <tr>
-                        <td><a href="@l.Address">@l.ResourceName</a></td>
-                    </tr>
+                    <!-- tr = table row -->
+                <tr>
+                    <!-- td = table cell what other info do you wnat to show?-->
+                    <td><a href="@l.Address">@l.ResourceName</a></td>
+                    <td>@ViewBag.PhysicalHealth.Description</td>
+                </tr>
                 }
+
             </tbody>
         </table>
     </div>
+
+
+    <div class="panel-body">
+        <table class="table table-sm table-striped table-bordered">
+            
+            <thead>
+                <!-- header row table column names auto bold -->
+                <tr>
+
+                    <th> Physical Wellness Resources</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DisOrientedProgramming.Models.ResourceLink l in ViewBag.PhysicalHealth)
+                {
+                    <!-- tr = table row -->
+                <tr>
+                    <!-- td = table cell what other info do you wnat to show?-->
+                    <td><a href="@l.Address">@l.ResourceName</a></td>
+                    <td>@ViewBag.PhysicalHealth.Description</td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
 </body>
 </html>
