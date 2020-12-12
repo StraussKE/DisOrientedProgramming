@@ -7,6 +7,13 @@
     <!--start list of topics-->
     <div class="container border m-2">
         <h3 class="text-center">Topics</h3>
-         <div class="container border rounded m-2">Rules</div>
+        @for (int i = 0; i < ViewBag.Topics.Count; i++)
+        {
+            <a asp-action="Topic" asp-controller="Forum" asp-route-t="@ViewBag.Topics[i].ForumTopicId" class="btn btn-success">Attend</a>
+
+
+
+
+        }
     </div>
 </div>
