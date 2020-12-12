@@ -9,6 +9,8 @@ namespace DisOrientedProgramming.Models
     {
         public string ResourceName { get; set; }
 
-        public string Address { get; set; }
+        public Uri Address { get; set; }
+
+        public string Description { get; set; }
     }
 }
