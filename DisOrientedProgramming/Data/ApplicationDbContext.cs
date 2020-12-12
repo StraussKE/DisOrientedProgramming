@@ -23,22 +23,27 @@ namespace DisOrientedProgramming.Data
             // replace with actual DbSets
         //public DbSet<Meeting> Meetings { get; set; }
 
+        public DbSet<ForumPost> ForumPosts { get; set; }
+        public DbSet<ForumTopic> ForumTopics { get; set; }
+        public DbSet<SurveyModel> SurveyModels { get; set; }
+        public DbSet<ResourceLink> ResourceLinks { get; set; }
+
             // if many to many bridges required
-        /* protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-                       
+            modelBuilder.ApplyConfiguration(new ResourceConfiguration());
 
-            modelBuilder.Entity<Speaker>().Ignore(s => s.SpeakerAccount);
+            /* modelBuilder.Entity<Speaker>().Ignore(s => s.SpeakerAccount);
 
-            // Speaker capable of being tied to a single AppUser account
+             // Speaker capable of being tied to a single AppUser account
 
-            modelBuilder.Entity<Speaker>()
-                .HasOne(s => s.SpeakerAccount)
-                .WithMany()
-                .IsRequired(false);
+             modelBuilder.Entity<Speaker>()
+                 .HasOne(s => s.SpeakerAccount)
+                 .WithMany()
+                 .IsRequired(false); */
 
-        } */
+        }
 
 
         public static async Task CreateRoles(IServiceProvider serviceProvider, IConfiguration configuration)
