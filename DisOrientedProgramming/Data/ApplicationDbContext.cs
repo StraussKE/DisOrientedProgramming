@@ -34,6 +34,10 @@ namespace DisOrientedProgramming.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new ResourceConfiguration());
 
+            modelBuilder.ApplyConfiguration(new ForumPostConfiguration());
+
+            modelBuilder.ApplyConfiguration(new ForumTopicConfiguration());
+
             /* modelBuilder.Entity<Speaker>().Ignore(s => s.SpeakerAccount);
 
              // Speaker capable of being tied to a single AppUser account

@@ -13,19 +13,23 @@ using DisOrientedProgramming.Models;
 
 namespace DisOrientedProgramming.Controllers
 {
-    public class ResourcesController : Controller
+    public class ResourceController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ResourcesController(ApplicationDbContext context)
+        public ResourceController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         public async Task<IActionResult> Index()
-        {
-            List<ResourceLink> resources = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).ToListAsync();
-            return View(resources);
+        { 
+            
+            ViewBag.MentalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "mental health").ToListAsync();
+
+            ViewBag.PhysicalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "physical health").ToListAsync();
+
+            return View();
         }
         
         /*public IActionResult LinkList()
