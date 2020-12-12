@@ -7,10 +7,10 @@ namespace DisOrientedProgramming.Models
 {
     public class ForumTopic
     {
-        int ForumTopicId { get; set; }
+        public int ForumTopicId { get; set; }
 
-        string Name { get; set; }
+        public string Name { get; set; }
 
-        string Desc { get; set; }
+        public string Desc { get; set; }
     }
 }
