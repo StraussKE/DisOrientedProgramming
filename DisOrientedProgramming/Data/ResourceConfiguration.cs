@@ -36,8 +36,49 @@ namespace DisOrientedProgramming.Data
                     ResourceType = "test",
                     Address = new Uri("www.lanecc.edu"),
                     Description = "LCC home page"
+                },
+                new ResourceLink
+                {
+                    ResourceLinkId = Guid.NewGuid(),
+                    ResourceName = "Psychology Today",
+                    ResourceType = "Mental Wellness",
+                    Address = new Uri("https://www.psychologytoday.com/us")
+                },
+                new ResourceLink
+                {
+                    ResourceLinkId = Guid.NewGuid(),
+                    ResourceName = "WhiteBird Clinic",
+                    ResourceType = "Physical Wellness",
+                    Address = new Uri("https://whitebirdclinic.org/")
+
+                },
+                new ResourceLink
+                {
+                    ResourceLinkId = Guid.NewGuid(),
+                    ResourceName = "LCC Dental Clinic",
+                    ResourceType = "Physical Wellness",
+                    Address = new Uri("https://www.lanecc.edu/dentalclinic")
+                },
+                new ResourceLink
+                {
+                    ResourceLinkId = Guid.NewGuid(),
+                    ResourceName = "Sign up for OHP",
+                    ResourceType = "Physical Wellness",
+                    Address = new Uri("https://one.oregon.gov/")
+                },
+                new ResourceLink
+                {
+                    ResourceLinkId = Guid.NewGuid(),
+                    ResourceName = "Hourglass - Columbia Care",
+                    ResourceType = "Mental Wellness",
+                    Address = new Uri("http://www.columbiacare.org/hourglass-community-crisis-center.html")
+                    
                 }
+
             );
+    ;
+
+           ;
         }
     }
 }
