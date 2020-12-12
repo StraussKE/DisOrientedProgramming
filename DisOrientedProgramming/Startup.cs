@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 using DisOrientedProgramming.Data;
 using DisOrientedProgramming.Models;
@@ -49,9 +50,24 @@ namespace DisOrientedProgramming
 				opts.SlidingExpiration = true;
 			});
 
-			services.AddDbContext<ApplicationDbContext>(options =>
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+			{
+				// Assuming that SQL Server is installed on Windows
+				services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(
-					Configuration.GetConnectionString("DefaultConnection")));
+					Configuration.GetConnectionString("SQLServerConnection")));
+
+				// For Azure:   "ConnectionStrings:AzureSQLServerConnection"
+				// For Windows: "Data:ForumDB:SQLServerConnection"
+			}
+
+			else
+			{
+				// Assuming SQLite is installed on all other operating systems
+				services.AddDbContext<ApplicationDbContext>(options =>
+						 options.UseSqlite(
+							 Configuration.GetConnectionString("SQLiteConnection")));
+			}
 
 			services.AddIdentity<AppUser, IdentityRole>(opts =>
 			{
