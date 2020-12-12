@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 
 using DisOrientedProgramming.Data;
 using DisOrientedProgramming.Models;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace DisOrientedProgramming.Controllers
 {
