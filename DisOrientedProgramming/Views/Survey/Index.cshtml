@@ -1,3 +1,70 @@
 ﻿@{
     ViewData["Title"] = "Survey Page";
 }
+
+<div id="body">
+    <div>
+        <h2>Survey</h2>
+        <p>
+            We sincerely hope you are enjoying this site! We are constantly looking for ways that we can
+            improve this site, and want to make sure that those additions are meaningful to everyone.
+            Please take a moment to let us know what you think of the site so far, and how we could improve.
+        </p>
+        <form>
+            <div id="Q1">
+                <label>
+                    In a few words pleae tell us what you'd like to see added, or adjusted to this site.
+                </label>
+                <br />
+                <textarea rows="3" cols="50"></textarea>
+            </div>
+            <br />
+            <div id="Q2">
+                <label>
+                    Please let us know what current aspects of the site you like. Our developers love to
+                    hear that people are enjoying the things they've made.
+                </label>
+                <br />
+                <textarea rows="3" cols="50"></textarea>
+            </div>
+            <br />
+            <div id="Q3">
+                <label>
+                    On a scale from 1 (Not Good) to 5 (Super Good!), how would you rate this app?
+                </label>
+                <br />
+                <input type="radio" name="siteRating" />
+                <label>1</label>
+                <input type="radio" name="siteRating" />
+                <label>2</label>
+                <input type="radio" name="siteRating" />
+                <label>3</label>
+                <input type="radio" name="siteRating" />
+                <label>4</label>
+                <input type="radio" name="siteRating" />
+                <label>5</label>
+            </div>
+            <br />
+            <div id="Q4">
+                <label>
+                    On a scale from 1 (Not Likely) to 5 (Super Likely!),
+                </label>
+                <br />
+                <input type="radio" name="siteReferable" />
+                <label>1</label>
+                <input type="radio" name="siteReferable" />
+                <label>2</label>
+                <input type="radio" name="siteReferable" />
+                <label>3</label>
+                <input type="radio" name="siteReferable" />
+                <label>4</label>
+                <input type="radio" name="siteReferable" />
+                <label>5</label>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">SUBMIT!</button>
+            </div>
+        </form>
+    </div>
+</div>
+
