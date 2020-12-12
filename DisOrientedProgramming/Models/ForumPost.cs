@@ -15,5 +15,8 @@ namespace DisOrientedProgramming.Models
 
         //this is used to track if this post is in response to a diff forum post
         ForumPost ParentPost { get; set; }
+
+        //this is used to track responses
+        List<ForumPost> Responses { get; set; }
     }
 }
