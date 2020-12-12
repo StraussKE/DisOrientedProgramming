@@ -23,7 +23,7 @@ namespace DisOrientedProgramming.Data
             (
                 new ResourceLink
                 {
-                    ResourceId = Guid.NewGuid(),
+                    ResourceLinkId = Guid.NewGuid(),
                     ResourceName = "Google",
                     ResourceType = "test",
                     Address = new Uri("www.google.com"),
@@ -31,7 +31,7 @@ namespace DisOrientedProgramming.Data
                 },
                 new ResourceLink
                 {
-                    ResourceId = Guid.NewGuid(),
+                    ResourceLinkId = Guid.NewGuid(),
                     ResourceName = "Lane Main",
                     ResourceType = "test",
                     Address = new Uri("www.lanecc.edu"),
