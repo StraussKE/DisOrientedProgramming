@@ -31,37 +31,33 @@
             </div>
             <br />
             <div id="Q3">
-                <label>
+                <section>
                     On a scale from 1 (Not Good) to 5 (Super Good!), how would you rate this app?
-                </label>
+                </section>
                 <br />
-                <input asp-for="Question3" type="radio" name="siteRating" value="1"/>
-                <label>1</label>
-                <input asp-for="Question3" type="radio" name="siteRating" value="2"/>
-                <label>2</label>
-                <input asp-for="Question3" type="radio" name="siteRating" value="3"/>
-                <label>3</label>
-                <input asp-for="Question3" type="radio" name="siteRating" value="4"/>
-                <label>4</label>
-                <input asp-for="Question3" type="radio" name="siteRating" value="5"/>
-                <label>5</label>
+                <select asp-for="Question3" style="height:25px; width:100px; background-color:skyblue">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </div>
             <br />
             <div id="Q4">
-                <label  asp-for="Question4">
+                <section asp-for="Question4">
                     On a scale from 1 (Not Likely) to 5 (Super Likely!),
-                </label>
+                </section>
                 <br />
-                <label><input asp-for="Question4" type="radio" name="siteReferable" value="1" />1</label>
-                <input asp-for="Question4" type="radio" name="siteReferable" value="2"/>
-                <label>2</label>
-                <input asp-for="Question4" type="radio" name="siteReferable" value="3"/>
-                <label>3</label>
-                <input asp-for="Question4" type="radio" name="siteReferable" value="4"/>
-                <label>4</label>
-                <input asp-for="Question4" type="radio" name="siteReferable" value="5"/>
-                <label>5</label>
+                <select asp-for="Question4" style="height:25px; width:100px; background-color:skyblue">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </div>
+            <br />
             <div>
                 <button type="submit" class="btn btn-primary">SUBMIT!</button>
             </div>
@@ -88,6 +84,9 @@
                     <label>How recommendable this site is:</label>
                     <br />
                     <p>@Model.Question4</p>
+                    <label>Result of Q3 + Q4:</label>
+                    <br />
+                    <p></p>
                 </div>
             }
         </div>

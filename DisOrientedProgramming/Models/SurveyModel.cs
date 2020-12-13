@@ -15,6 +15,14 @@ namespace DisOrientedProgramming.Models
 
         public int Question4 { get; set; }
 
+        public int SumOfQ3Answers { get; set; }
+
+        public int SumOfQ4Answers { get; set; }
+
+        public int TotalNumOfQ3s { get; set; }
+
+        public int TotalNumOfQ4s { get; set; }
+
 
 
     }//End Class 
