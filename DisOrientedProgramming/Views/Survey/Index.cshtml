@@ -6,7 +6,7 @@
 
 <div id="body">
     <div id="SurveyQs">
-        <h2>Hey UserName!</h2>
+        <h2>Hello!</h2>
         <p>
             We sincerely hope you are enjoying this site! We are constantly looking for ways that we can
             improve this site, and want to make sure that those additions are meaningful to everyone.
@@ -15,12 +15,10 @@
         <form method="post" asp-action="Index">
             <div id="Q1">
                 <label>
-                    In a few words pleae tell us what you'd like to see added, or adjusted to this site.
+                    In a few words please tell us what you'd like to see added, or adjusted to this site.
                 </label>
                 <br />
-
                 <textarea asp-for="Question1" rows="3" cols="50" class="Fix-Size"></textarea>
-
             </div>
             <br />
             <div id="Q2">
@@ -29,9 +27,7 @@
                     hear that people are enjoying the things they've made.
                 </label>
                 <br />
-
                 <textarea asp-for="Question2" rows="3" cols="50" class="Fix-Size"></textarea>
-
             </div>
             <br />
             <div id="Q3">
@@ -69,11 +65,11 @@
     </div>
     <div id="Results">
         <p>
-            Post submit results will be displayed here temporarily: 
+            Post submit results will be displayed here temporarily:
         </p>
         <br />
         <div>
-            @if(Model != null)
+            @if (Model != null)
             {
             <div id="Answers">
                 <label>Suggestions for future additions:</label>
@@ -88,27 +84,36 @@
                 <label>How recommendable this site is:</label>
                 <br />
                 <p>@Model.Question4</p>
-                <label>SumOfQ3Answers:</label>
+                <label>Average rating of site from all users:</label>
                 <br />
-                <p>@Model.SumOfQ3Answers</p>
-                <label>SumOfQ4Answers:</label>
+                <p>@ViewBag.averageValOfQ3s</p>
+                <label>Average rating of site referability from all users:</label>
                 <br />
-                <p>@Model.SumOfQ4Answers</p>
-                <label>TotalNumOfQ3s:</label>
-                <br />
-                <p>@Model.TotalNumOfQ3s</p>
-                <label>TotalNumOfQ4s:</label>
-                <br />
-                <p>@Model.TotalNumOfQ4s</p>
-                <label>AverageValOfQ3s:</label>
-                <br />
-                <p>@Model.AverageValOfQ3s</p>
-                <label>AverageValOfQ4s:</label>
-                <br />
-                <p>@Model.AverageValOfQ4s</p>
+                <p>@ViewBag.averageValOfQ4s</p>
             </div>
             }
         </div>
     </div>
 </div>
 
+@*
+    Removed from model & view.
+    <label>SumOfQ3Answers:</label>
+    <br />
+    <p>@Model.SumOfQ3Answers</p>
+    <label>SumOfQ4Answers:</label>
+    <br />
+    <p>@Model.SumOfQ4Answers</p>
+    <label>TotalNumOfQ3s:</label>
+    <br />
+    <p>@Model.TotalNumOfQ3s</p>
+    <label>TotalNumOfQ4s:</label>
+    <br />
+    <p>@Model.TotalNumOfQ4s</p>
+    <label>AverageValOfQ3s:</label>
+    <br />
+    <p>@Model.AverageValOfQ3s</p>
+    <label>AverageValOfQ4s:</label>
+    <br />
+    <p>@Model.AverageValOfQ4s</p>
+*@
