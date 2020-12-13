@@ -92,3 +92,12 @@ body {
 .Fix-Size{
     resize : none;
 }
+/*font size for home page */
+.Big-Home{
+    font-size: 1.2em;
+}
+
+/*light blue color for dropdowns*/
+.lecolor{
+    background-color: #BFF9FF;
+}
