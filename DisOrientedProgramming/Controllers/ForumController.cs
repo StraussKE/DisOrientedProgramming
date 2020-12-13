@@ -48,9 +48,11 @@ namespace DisOrientedProgramming.Controllers
         {
             ForumTopic topic =  _context.ForumTopics.First(Topic => Topic.ForumTopicId == t);
             ViewBag.Topic = topic.Name;
-            ViewBag.Posts = _context.ForumPosts.Where(post => post.Topic == topic).ToList();
+            ViewBag.Posts = _context.ForumPosts.Where(post => post.Topic == topic && post.ParentPost == null).ToList();
             return View();
         }
+
+
 
         //I do not know how to implement this
         //will come back and learn async when time
@@ -72,9 +74,39 @@ namespace DisOrientedProgramming.Controllers
             p.ForumPostId == startPost).FirstOrDefault(); ;
 
             ViewBag.PostList = _context.ForumPosts.Where(p =>
-            p.ParentPost.ForumPostId == startPost);
+            p.ParentPost.ForumPostId == startPost).ToList();
+            
+            //make the base post
+            ForumPost post = new ForumPost();
+            //make the parent holder
+            ForumPost topPost = new ForumPost();
 
-            return View();
+            
+            //set place holders
+            post.ParentPost = topPost;
+            
+
+           
+            return View(post);
+        }
+        
+        //handels the submition of commints
+        [HttpPost]
+        public IActionResult ViewThread(ForumPost comment)
+        {
+            //get the parent post
+            comment.ParentPost = _context.ForumPosts.Where(p =>
+            p.ForumPostId == comment.ParentPost.ForumPostId).FirstOrDefault();
+
+            //set the post time 
+            comment.TimePosted = DateTime.Now;
+
+            comment.ForumPostId = Guid.NewGuid();
+
+            _context.ForumPosts.Add(comment);
+            _context.SaveChanges();
+
+            return RedirectToAction("ViewThread", new { startPost = comment.ParentPost.ForumPostId, Area = "" });
         }
     }
 }
