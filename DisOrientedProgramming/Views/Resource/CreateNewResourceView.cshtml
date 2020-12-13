@@ -9,8 +9,6 @@
     ViewData["Title"] = "Related Links";
 }
 
-
-
     <h1>Create</h1>
 
     <h4>Meeting</h4>
@@ -23,6 +21,14 @@
             <label asp-for="ResourceName" class="control-label"><</label>
             <input asp-for="ResourceName" class="form-control" />
             <span asp-validation-for="ResourceName" class="text-danger"></span>
+        </div>
+        <div class="dropdown">
+            <select asp-for="ResourceType"
+                    asp-items="@(new SelectList(ViewBag.ResourceType, "ResourceType"))">
+            <option>Select a Speaker!</option>
+            </select>
+            <input_type="button" value="Choose Resource Type"onclick=Html.RenderPartialAsync()
+
         </div>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group"></div>
@@ -40,26 +46,4 @@
         <label asp-for="Address" class="control-label"><</label>
         <input asp-for="Address" class="form-control" />
         <span asp-validation-for="Address" class="text-danger"></span>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>

@@ -9,7 +9,7 @@ namespace DisOrientedProgramming.Models
     {
         public Guid ResourceLinkId { get; set; }
 
-        public string ResourceName { get; set; }
+        public virtual string  ResourceName { get; set; }
 
         public string ResourceType { get; set; }
 

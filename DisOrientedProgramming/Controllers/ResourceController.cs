@@ -25,11 +25,11 @@ namespace DisOrientedProgramming.Controllers
         public async Task<IActionResult> Index()
         {
 
-            ViewBag.MentalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Mental Health").ToListAsync();
+            ViewBag.MentalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Mental Wellness").ToListAsync();
 
-            ViewBag.PhysicalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Physical Health").ToListAsync();
+            ViewBag.PhysicalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Physical Wellness").ToListAsync();
 
-
+            ViewBag.ResourceTypes =  _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Physical Wellness").ToListAsync();
 
             return View();
         }
@@ -45,7 +45,7 @@ namespace DisOrientedProgramming.Controllers
                     ResourceType = model.ResourceType,
                 };
 
-                _context.Add(resource);
+                _context.ResourceLinks.Add(resource);
                 await _context.SaveChangesAsync().ConfigureAwait(true);
                 return RedirectToAction("Index", new { id = resource.ResourceLinkId });
             }
