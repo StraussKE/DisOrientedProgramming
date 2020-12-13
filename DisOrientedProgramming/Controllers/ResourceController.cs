@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 using DisOrientedProgramming.Data;
 using DisOrientedProgramming.Models;
@@ -33,7 +34,7 @@ namespace DisOrientedProgramming.Controllers
 
             return View();
         }
-        public  IActionResult Create(ResourceLink model)
+        public  async Task<IActionResult> Create(ResourceLink model)
         {
             //if (ModelState.IsValid)
             //{
@@ -46,7 +47,7 @@ namespace DisOrientedProgramming.Controllers
                 //    };
                 model.ResourceLinkId = Guid.NewGuid();
                 _context.ResourceLinks.Add(model);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 //await _context.SaveChangesAsync().ConfigureAwait(true);
                 return RedirectToAction("Index", new { id = model.ResourceLinkId });

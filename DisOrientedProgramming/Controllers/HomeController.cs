@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 using DisOrientedProgramming.Data;
 using DisOrientedProgramming.Models;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
+
 
 namespace DisOrientedProgramming.Controllers
 {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
 
 using DisOrientedProgramming.Data;
 using DisOrientedProgramming.Models;
@@ -14,8 +15,8 @@ using DisOrientedProgramming.Models;
 
 namespace DisOrientedProgramming.Controllers
 {
-    [Authorize(Roles = "Admins")]
-    public class AdminUserController : Controller
+    [Authorize(Roles = "Admin")]
+    public class AdminController : Controller
     {
         private UserManager<AppUser> _userManager;
         private IUserValidator<AppUser> _userValidator;
@@ -24,7 +25,7 @@ namespace DisOrientedProgramming.Controllers
         private ApplicationDbContext _context;
         private RoleManager<IdentityRole> _roleManager;
         
-        public AdminUserController(UserManager<AppUser> usrMgr,
+        public AdminController(UserManager<AppUser> usrMgr,
                 IUserValidator<AppUser> userValid,
                 IPasswordValidator<AppUser> passValid,
                 IPasswordHasher<AppUser> passwordHash,
@@ -40,7 +41,12 @@ namespace DisOrientedProgramming.Controllers
             _roleManager = roleMgr;
         }
 
-        public async Task<ViewResult> Index(string orderBy = "default")
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public async Task<ViewResult> UserIndex(string orderBy = "default")
         {
             //gets the data 
             var users = await _userManager.Users.ToListAsync();
@@ -112,15 +118,14 @@ namespace DisOrientedProgramming.Controllers
         }
          
 
-        public ViewResult Create() => View();
+        public ViewResult CreateUser() => View();
         public ViewResult ShowAccounts()
-
         {
             return View(_userManager.Users);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateUserViewModel model)
+        public async Task<IActionResult> CreateUser(CreateUserViewModel model)
         {         
             if (ModelState.IsValid)
             {
@@ -143,7 +148,7 @@ namespace DisOrientedProgramming.Controllers
                 }
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("UserIndex");
                 }
                 else
                 {
@@ -156,7 +161,7 @@ namespace DisOrientedProgramming.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> DeleteUser(string id)
         {
             AppUser user = await _userManager.FindByIdAsync(id);
             if (user!=null)
@@ -164,7 +169,7 @@ namespace DisOrientedProgramming.Controllers
                 IdentityResult result = await _userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("UserIndex");
                 }
                 else
                 {
@@ -177,7 +182,7 @@ namespace DisOrientedProgramming.Controllers
             }
             return View("Index", _userManager.Users);
         }
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> EditUser(string id)
         {
             AppUser user = await _userManager.FindByIdAsync(id);
             if (user!= null)
@@ -186,12 +191,12 @@ namespace DisOrientedProgramming.Controllers
             }
             else
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("UserIndex");
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, string firstName, string lastName, string email,
+        public async Task<IActionResult> EditUser(string id, string firstName, string lastName, string email,
               string password)
         {
             AppUser user = await _userManager.FindByIdAsync(id);
@@ -227,7 +232,7 @@ namespace DisOrientedProgramming.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("UserIndex");
                     }
                     else
                     {
@@ -240,6 +245,123 @@ namespace DisOrientedProgramming.Controllers
                 ModelState.AddModelError("", "User Not Found");
             }
             return View(user);
+        }
+
+        // Role Management
+
+        public IActionResult AdminRoleManagement()
+        {
+            ViewBag.userManager = _userManager;
+            return View(_roleManager.Roles);
+        }
+        public ViewResult RoleIndex() => View(_roleManager.Roles);
+
+        public IActionResult Create() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRole([Required]string name)
+        {
+            if (ModelState.IsValid)
+            {
+                IdentityResult result
+                    = await _roleManager.CreateAsync(new IdentityRole(name));
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("RoleIndex");
+                }
+                else
+                {
+                    AddErrorsFromResult(result);
+                }
+            }
+            return View(name);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            IdentityRole role = await _roleManager.FindByIdAsync(id);
+            if (role != null)
+            {
+                IdentityResult result = await _roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    AddErrorsFromResult(result);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "No role found");
+            }
+            return View("RoleIndex", _roleManager.Roles);
+        }
+
+        public async Task<IActionResult> EditRole(string id)
+        {
+
+            IdentityRole role = await _roleManager.FindByIdAsync(id);
+            List<AppUser> members = new List<AppUser>();
+            List<AppUser> nonMembers = new List<AppUser>();
+            foreach (AppUser user in _userManager.Users)
+            {
+                var list = await _userManager.IsInRoleAsync(user, role.Name)
+                    ? members : nonMembers;
+                list.Add(user);
+            }
+            return View(new RoleEditModel
+            {
+                Role = role,
+                Members = members,
+                NonMembers = nonMembers
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRole(RoleModificationModel model)
+        {
+            IdentityResult result;
+            if (ModelState.IsValid)
+            {
+                foreach (string userId in model.IdsToAdd ?? new string[] { })
+                {
+                    AppUser user = await _userManager.FindByIdAsync(userId);
+                    if (user != null)
+                    {
+                        result = await _userManager.AddToRoleAsync(user,
+                            model.RoleName);
+                        if (!result.Succeeded)
+                        {
+                            AddErrorsFromResult(result);
+                        }
+                    }
+                }
+                foreach (string userId in model.IdsToDelete ?? new string[] { })
+                {
+                    AppUser user = await _userManager.FindByIdAsync(userId);
+                    if (user != null)
+                    {
+                        result = await _userManager.RemoveFromRoleAsync(user,
+                            model.RoleName);
+                        if (!result.Succeeded)
+                        {
+                            AddErrorsFromResult(result);
+                        }
+                    }
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(RoleIndex));
+            }
+            else
+            {
+                return await EditRole(model.RoleId);
+            }
         }
 
         private void AddErrorsFromResult(IdentityResult result)
