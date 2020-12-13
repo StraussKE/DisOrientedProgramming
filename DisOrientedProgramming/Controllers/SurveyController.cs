@@ -33,30 +33,53 @@ namespace DisOrientedProgramming.Controllers
         [HttpPost]
         public IActionResult Index(SurveyModel model)
         {
-            List<SurveyModel> listOfModelObjects = context.SurveyModels.ToList();
+            context.SurveyModels.Add(model);
+            context.SaveChanges();
 
-            int     sumOfQ3Answers  = 0;
-            int     sumOfQ4Answers  = 0;
-            int     totalNumOfQ3s   = 0;
-            int     totalNumOfQ4s   = 0;
-            double  averageValOfQ3s = 0;
-            double  averageValOfQ4s = 0;
+            int sumOfQ3Answers = 0;
+            int sumOfQ4Answers = 0;
+            int counter = 0;
+
+            List<SurveyModel> listOfModelObjects = context.SurveyModels.ToList();
 
             foreach (var obj in listOfModelObjects)
             {
                 sumOfQ3Answers += obj.Question3;
                 sumOfQ4Answers += obj.Question4;
-                totalNumOfQ3s++;
-                totalNumOfQ4s++;
+                counter++;
             }
 
-            averageValOfQ3s = sumOfQ3Answers / totalNumOfQ3s;
-            averageValOfQ4s = sumOfQ4Answers / totalNumOfQ4s;
+            ViewBag.averageValOfQ3s = sumOfQ3Answers / counter;
+            ViewBag.averageValOfQ4s = sumOfQ4Answers / counter;
 
-            context.SurveyModels.Add(model);
+            context.SurveyModels.Update(model);
             context.SaveChanges();
 
             return View(model);
+
+            // Below is the original version of the contents of this method.
+            // It totally wasts DB space by storing derivable data.
+
+            //context.SurveyModels.Add(model);
+            //context.SaveChanges();
+
+            //List<SurveyModel> listOfModelObjects = context.SurveyModels.ToList();
+
+            //foreach (var obj in listOfModelObjects)
+            //{
+            //    model.SumOfQ3Answers += obj.Question3;
+            //    model.SumOfQ4Answers += obj.Question4;
+            //    model.TotalNumOfQ3s++;
+            //    model.TotalNumOfQ4s++;
+            //}
+
+            //model.AverageValOfQ3s = model.SumOfQ3Answers / model.TotalNumOfQ3s;
+            //model.AverageValOfQ4s = model.SumOfQ4Answers / model.TotalNumOfQ4s;
+
+            //context.SurveyModels.Update(model);
+            //context.SaveChanges();
+
+            //return View(model);
         }
 
 
