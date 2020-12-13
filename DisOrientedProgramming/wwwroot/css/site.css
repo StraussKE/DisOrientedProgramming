@@ -93,7 +93,11 @@ body {
     resize : none;
 }
 /*font size for home page */
-.Big-Home{
+p{
+    font-size: 1.2em;
+}
+
+.Big-small-font {
     font-size: 1.2em;
 }
 

@@ -8,5 +8,27 @@
 
 @for (int i = 0; i < ViewBag.Posts.Count; i++)
 {
-<a asp-action="ViewThread" asp-controller="Forum" asp-route-startPost="@ViewBag.Posts[i].ForumPostId" class="Normal-link"><h3>@ViewBag.Posts[i].PostTitle</h3></a>
+
+        <a asp-action="ViewThread" asp-controller="Forum" asp-route-startPost="@ViewBag.Posts[i].ForumPostId" class="Normal-link">
+            <div class="container border  m-2 bg-info text-white">
+                <h3 class="text-center">@ViewBag.Posts[i].PostTitle</h3>
+                <p class="Big-Home">
+                    @{ 
+                        if (ViewBag.Posts[i].PostText.Length < 50)
+                        {
+                        @ViewBag.Posts[i].PostText;
+                        }
+                        else
+                        {
+                        @ViewBag.Posts[i].PostText.Substring(0, 51);
+                            
+                        }
+                        }
+                    @if(ViewBag.Posts[i].PostText.Length > 50)
+                    {
+                        <span>...</span>
+                    }
+                </p>
+            </div>
+        </a>
 }

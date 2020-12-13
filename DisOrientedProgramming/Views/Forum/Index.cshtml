@@ -12,7 +12,7 @@
         @for (int i = 0; i < ViewBag.Topics.Count; i++)
         {
             <div class="container border rounded my-3 bg-success p-1">
-                <a asp-action="Topic" asp-controller="Forum" asp-route-t="@ViewBag.Topics[i].ForumTopicId" class="Normal-link h3 p-2 m-2 text-white">@ViewBag.Topics[i].Name :  @ViewBag.Topics[i].Desc</a>
+                <a asp-action="Topic" asp-controller="Forum" asp-route-t="@ViewBag.Topics[i].ForumTopicId" class="Normal-link h3 p-2 m-2 text-white Big-small-font">@ViewBag.Topics[i].Name :  @ViewBag.Topics[i].Desc</a>
 
             </div>
 
