@@ -33,24 +33,26 @@ namespace DisOrientedProgramming.Controllers
 
             return View();
         }
-        public async Task<IActionResult> Create(ResourceLink model)
+        public  IActionResult Create(ResourceLink model)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
 
-                ResourceLink resource = new ResourceLink
-                {
-                    ResourceLinkId = Guid.NewGuid(),
-                    ResourceName = model.ResourceName,
-                    ResourceType = model.ResourceType,
-                };
+                //    ResourceLink resource = new ResourceLink
+                //    {
+                //        ResourceLinkId = Guid.NewGuid(),
+                //        ResourceName = model.ResourceName,
+                //        ResourceType = model.ResourceType,
+                //    };
+                model.ResourceLinkId = Guid.NewGuid();
+                _context.ResourceLinks.Add(model);
+                _context.SaveChanges();
 
-                _context.ResourceLinks.Add(resource);
-                await _context.SaveChangesAsync().ConfigureAwait(true);
-                return RedirectToAction("Index", new { id = resource.ResourceLinkId });
-            }
+                //await _context.SaveChangesAsync().ConfigureAwait(true);
+                return RedirectToAction("Index", new { id = model.ResourceLinkId });
+            //}
 
-            return View();
+           // return View();
 
         }
     }

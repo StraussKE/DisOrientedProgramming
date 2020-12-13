@@ -82,15 +82,18 @@
             </div>
         </div>*@
 <h3>Fully Functional Form to Add Resources I Swear</h3>
-<form method="post">
+<form method="post" action ="/Resource/Create">
     <div class="form-group py-2">
-        <label asp-for="ResourceName"></label>
+        <label asp-for="ResourceName">Resource Name</label>
         <input asp-for="ResourceName" class="form-control" required />
     </div>
  
     <div class="form-group py-2">
-        <label asp-for="ResourceType"></label>
-        <textarea asp-for="ResourceType" class="form-control"></textarea>
+        <label asp-for="ResourceType">Resource Type</label>
+       <select asp-for="ResourceType" class= "form-control">
+           <option value="Mental Wellness"> Mental Wellness</option>
+           <option value="Physical Wellness">Physical Wellness</option>
+       </select>
     </div>
     <div class="form-group py-2">
         <label asp-for="Address"></label>
