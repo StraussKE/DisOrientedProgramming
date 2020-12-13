@@ -24,43 +24,50 @@ namespace DisOrientedProgramming.Data
                 {
                     ForumTopicId = Guid.NewGuid(),
                     Name = "Rules",
-                    Desc = "The rules for the forum"
+                    Desc = "The rules for the forum",
+                    OrderNumber = 1
                 },
                 new ForumTopic
                 {
                     ForumTopicId = Guid.NewGuid(),
                     Name = "Introductions",
-                    Desc = "Introduce yourself!"
+                    Desc = "Introduce yourself!",
+                    OrderNumber = 2
                 },
                 new ForumTopic
                 {
                     ForumTopicId = Guid.NewGuid(),
                     Name = "social",
-                    Desc = "Come Hangout with People!"
+                    Desc = "Come Hangout with People!",
+                    OrderNumber = 3
                 },
                 new ForumTopic
                 {
                     ForumTopicId = Guid.NewGuid(),
                     Name = "Fitness",
-                    Desc = "Talk about all things fitness!"
+                    Desc = "Talk about all things fitness!",
+                    OrderNumber = 5
                 },
                 new ForumTopic
                 {
                     ForumTopicId = Guid.NewGuid(),
                     Name = "Getting a Good Night’s Sleep",
-                    Desc = "Zzzzzzzz's"
+                    Desc = "Zzzzzzzz's",
+                    OrderNumber = 6
                 },
                 new ForumTopic
                 {
                     ForumTopicId = Guid.NewGuid(),
                     Name = "Meditation",
-                    Desc = "Talk about clearing your mind and getting into a better headspace"
+                    Desc = "Talk about clearing your mind and getting into a better headspace",
+                    OrderNumber = 4
                 },
                 new ForumTopic
                 {
                     ForumTopicId = Guid.NewGuid(),
                     Name = "Off-topic",
-                    Desc = "Unreatled conversations"
+                    Desc = "Unreatled conversations",
+                    OrderNumber = 7
                 }
 
             );

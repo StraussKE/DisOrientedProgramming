@@ -24,7 +24,7 @@ namespace DisOrientedProgramming.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Topics = _context.ForumTopics.ToList();
+            ViewBag.Topics = _context.ForumTopics.OrderBy(t => t.OrderNumber).ToList();
             return View();
         }
 
@@ -34,6 +34,8 @@ namespace DisOrientedProgramming.Controllers
             ForumTopic topic = _context.ForumTopics.Where(f =>f.Name == usersPost.Topic.Name).FirstOrDefault();
 
             usersPost.Topic = topic;
+
+            usersPost.TimePosted = DateTime.Now;
 
             _context.ForumPosts.Add(usersPost);
             _context.SaveChanges();
