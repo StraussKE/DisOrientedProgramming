@@ -35,14 +35,23 @@ namespace DisOrientedProgramming.Controllers
         {
             List<SurveyModel> listOfModelObjects = context.SurveyModels.ToList();
 
-            int sumOfQ3Vals = 0;
-            int sumOfQ4Vals = 0;
+            int     sumOfQ3Answers  = 0;
+            int     sumOfQ4Answers  = 0;
+            int     totalNumOfQ3s   = 0;
+            int     totalNumOfQ4s   = 0;
+            double  averageValOfQ3s = 0;
+            double  averageValOfQ4s = 0;
 
             foreach (var obj in listOfModelObjects)
             {
-                sumOfQ3Vals += obj.Question3;
-                sumOfQ4Vals += obj.Question4;
+                sumOfQ3Answers += obj.Question3;
+                sumOfQ4Answers += obj.Question4;
+                totalNumOfQ3s++;
+                totalNumOfQ4s++;
             }
+
+            averageValOfQ3s = sumOfQ3Answers / totalNumOfQ3s;
+            averageValOfQ4s = sumOfQ4Answers / totalNumOfQ4s;
 
             context.SurveyModels.Add(model);
             context.SaveChanges();
