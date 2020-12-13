@@ -37,7 +37,7 @@ namespace DisOrientedProgramming.Data
                 new ForumTopic
                 {
                     ForumTopicId = Guid.NewGuid(),
-                    Name = "social",
+                    Name = "Social",
                     Desc = "Come Hangout with People!",
                     OrderNumber = 3
                 },
@@ -66,7 +66,7 @@ namespace DisOrientedProgramming.Data
                 {
                     ForumTopicId = Guid.NewGuid(),
                     Name = "Off-topic",
-                    Desc = "Unreatled conversations",
+                    Desc = "Unrelated conversations",
                     OrderNumber = 7
                 }
 
