@@ -1,22 +1,24 @@
-﻿@{
+﻿@model SurveyModel
+
+@{
     ViewData["Title"] = "Survey Page";
 }
 
 <div id="body">
-    <div>
-        <h2>Survey</h2>
+    <div id="SurveyQs">
+        <h2>Hello!</h2>
         <p>
             We sincerely hope you are enjoying this site! We are constantly looking for ways that we can
             improve this site, and want to make sure that those additions are meaningful to everyone.
             Please take a moment to let us know what you think of the site so far, and how we could improve.
         </p>
-        <form>
+        <form method="post" asp-action="Index">
             <div id="Q1">
                 <label>
-                    In a few words pleae tell us what you'd like to see added, or adjusted to this site.
+                    In a few words please tell us what you'd like to see added, or adjusted to this site.
                 </label>
                 <br />
-                <textarea rows="3" cols="50"></textarea>
+                <textarea asp-for="Question1" rows="3" cols="50" class="Fix-Size lecolor"></textarea>
             </div>
             <br />
             <div id="Q2">
@@ -25,46 +27,93 @@
                     hear that people are enjoying the things they've made.
                 </label>
                 <br />
-                <textarea rows="3" cols="50"></textarea>
+                <textarea asp-for="Question2" rows="3" cols="50" class="Fix-Size lecolor"></textarea>
             </div>
             <br />
             <div id="Q3">
-                <label>
+                <section>
                     On a scale from 1 (Not Good) to 5 (Super Good!), how would you rate this app?
-                </label>
+                </section>
                 <br />
-                <input type="radio" name="siteRating" />
-                <label>1</label>
-                <input type="radio" name="siteRating" />
-                <label>2</label>
-                <input type="radio" name="siteRating" />
-                <label>3</label>
-                <input type="radio" name="siteRating" />
-                <label>4</label>
-                <input type="radio" name="siteRating" />
-                <label>5</label>
+                <select asp-for="Question3" style="height:25px; width:100px" class="lecolor">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </div>
             <br />
             <div id="Q4">
-                <label>
+                <section asp-for="Question4">
                     On a scale from 1 (Not Likely) to 5 (Super Likely!),
-                </label>
+                </section>
                 <br />
-                <input type="radio" name="siteReferable" />
-                <label>1</label>
-                <input type="radio" name="siteReferable" />
-                <label>2</label>
-                <input type="radio" name="siteReferable" />
-                <label>3</label>
-                <input type="radio" name="siteReferable" />
-                <label>4</label>
-                <input type="radio" name="siteReferable" />
-                <label>5</label>
+                <select asp-for="Question4" style="height:25px; width:100px" class="lecolor">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </div>
+            <br />
             <div>
                 <button type="submit" class="btn btn-primary">SUBMIT!</button>
             </div>
         </form>
     </div>
+    <div id="Results">
+        <div>
+            @if (Model != null)
+            {
+                <p>
+                    Post submit results will be displayed here temporarily:
+                </p>
+                <br />
+                <div id="Answers">
+                    <label>Suggestions for future additions:</label>
+                    <br />
+                    <p>@Model.Question1</p>
+                    <label>Things you like about our site as it is:</label>
+                    <br />
+                    <p>@Model.Question2</p>
+                    <label>Site rating:</label>
+                    <br />
+                    <p>@Model.Question3</p>
+                    <label>How recommendable this site is:</label>
+                    <br />
+                    <p>@Model.Question4</p>
+                    <label>Average rating of site from all users:</label>
+                    <br />
+                    <p>@ViewBag.averageValOfQ3s</p>
+                    <label>Average rating of site referability from all users:</label>
+                    <br />
+                    <p>@ViewBag.averageValOfQ4s</p>
+                </div>
+            }
+        </div>
+    </div>
 </div>
 
+@*
+    Removed from model & view.
+    <label>SumOfQ3Answers:</label>
+    <br />
+    <p>@Model.SumOfQ3Answers</p>
+    <label>SumOfQ4Answers:</label>
+    <br />
+    <p>@Model.SumOfQ4Answers</p>
+    <label>TotalNumOfQ3s:</label>
+    <br />
+    <p>@Model.TotalNumOfQ3s</p>
+    <label>TotalNumOfQ4s:</label>
+    <br />
+    <p>@Model.TotalNumOfQ4s</p>
+    <label>AverageValOfQ3s:</label>
+    <br />
+    <p>@Model.AverageValOfQ3s</p>
+    <label>AverageValOfQ4s:</label>
+    <br />
+    <p>@Model.AverageValOfQ4s</p>
+*@

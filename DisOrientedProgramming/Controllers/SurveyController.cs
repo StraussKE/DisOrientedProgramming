@@ -15,10 +15,71 @@ namespace DisOrientedProgramming.Controllers
 {
     public class SurveyController : Controller
     {
+
+        ApplicationDbContext context;
+
+        public SurveyController (ApplicationDbContext c)
+        {
+            context = c;
+        }
+
+        
         // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(SurveyModel model)
+        {
+            context.SurveyModels.Add(model);
+            context.SaveChanges();
+
+            int sumOfQ3Answers = 0;
+            int sumOfQ4Answers = 0;
+            int counter = 0;
+
+            List<SurveyModel> listOfModelObjects = context.SurveyModels.ToList();
+
+            foreach (var obj in listOfModelObjects)
+            {
+                sumOfQ3Answers += obj.Question3;
+                sumOfQ4Answers += obj.Question4;
+                counter++;
+            }
+
+            ViewBag.averageValOfQ3s = sumOfQ3Answers / counter;
+            ViewBag.averageValOfQ4s = sumOfQ4Answers / counter;
+
+            context.SurveyModels.Update(model);
+            context.SaveChanges();
+
+            return View(model);
+
+            // Below is the original version of the contents of this method.
+            // It totally wasts DB space by storing derivable data.
+
+            //context.SurveyModels.Add(model);
+            //context.SaveChanges();
+
+            //List<SurveyModel> listOfModelObjects = context.SurveyModels.ToList();
+
+            //foreach (var obj in listOfModelObjects)
+            //{
+            //    model.SumOfQ3Answers += obj.Question3;
+            //    model.SumOfQ4Answers += obj.Question4;
+            //    model.TotalNumOfQ3s++;
+            //    model.TotalNumOfQ4s++;
+            //}
+
+            //model.AverageValOfQ3s = model.SumOfQ3Answers / model.TotalNumOfQ3s;
+            //model.AverageValOfQ4s = model.SumOfQ4Answers / model.TotalNumOfQ4s;
+
+            //context.SurveyModels.Update(model);
+            //context.SaveChanges();
+
+            //return View(model);
         }
 
 

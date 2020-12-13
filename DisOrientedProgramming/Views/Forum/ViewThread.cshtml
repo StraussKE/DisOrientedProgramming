@@ -1,0 +1,31 @@
+﻿@model ForumPost
+@{
+    Model.ParentPost.ForumPostId= @ViewBag.TopPost.ForumPostId;
+    
+    @Model.PostTitle= @ViewBag.TopPost.PostTitle;
+
+}
+<div class="container border mb-4 bg-primary text-white">
+    <h1 class="text-center">@ViewBag.TopPost.PostTitle</h1>
+    <p class="text-center">@ViewBag.TopPost.PostText</p>
+</div>
+<h3>Comments:</h3>
+@for(int i = 0;  i < ViewBag.PostList.Count; i++)
+{
+    <div class="container border m-2 p-2 Big-small-font bg-info text-white">
+        @ViewBag.PostList[i].PostText
+    </div>
+}
+<h2>Make a Reply!</h2>
+<form method="post">
+    <div class="form-group py-2" >
+        <label asp-for="PostText">Post</label>
+        <textarea asp-for="PostText" class="form-control"></textarea>
+    </div>
+    <input type="hidden" asp-for="ParentPost.ForumPostId" value="@ViewBag.TopPost.ForumPostId" />
+    <input type="hidden" asp-for="PostTitle" value="@ViewBag.TopPost.PostTitle" />
+
+    <div>
+        <button type="submit" class="btn btn-primary">Post</button>
+    </div>
+</form>

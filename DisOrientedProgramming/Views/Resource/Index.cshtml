@@ -1,25 +1,114 @@
-﻿@model IEnumerable<DisOrientedProgramming.Models.ResourceLink>
+﻿@model ResourceLink
 @{
-    Layout = "_Layout";
-    ViewData["Title"] = "Related Links";
+  
+    ViewData["Title"] = "Resources";
 }
 
-<!DOCTYPE = "html">
 
-<html>
 
-<body>
+
+    <!-- Mental health links table -->
+    <h1 class="text-center">@ViewData["Title"]</h1>
     <div class="panel-body">
         <table class="table table-sm table-striped table-bordered">
-            <tbody>
-                @foreach (DisOrientedProgramming.Models.ResourceLink l in Model)
-                {
-                    <tr>
-                        <td><a href="@l.Address">@l.ResourceName</a></td>
-                    </tr>
-                }
-            </tbody>
+
+            <thead>
+                <!-- header row table column names auto bold -->
+                <tr>
+
+                    <th colspan="2"> Mental Wellness Resources</th>
+                </tr>
+            </thead>
+
+            @foreach (ResourceLink l in ViewBag.MentalHealth)
+            {
+
+                <tr>
+                    <td><a href="@l.Address">@l.ResourceName</a></td>
+                    <td>@l.Description</td>
+                </tr>
+            }
+
+
         </table>
     </div>
-</body>
-</html>
+
+
+    <div class="panel-body">
+        <table class="table table-sm table-striped table-bordered">
+
+            <thead>
+                <!-- header row table column names auto bold -->
+                <tr>
+
+                    <th colspan="2"> Physical Wellness Resources</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ResourceLink l in ViewBag.PhysicalHealth)
+                {
+                    <!-- tr = table row -->
+                    <tr>
+                        <!-- td = table cell what other info do you wnat to show?-->
+                        <td><a href="@l.Address">@l.ResourceName</a></td>
+                        <td>@l.Description</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+
+    @*<div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" enctype="multipart/form-data"></form>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group"></div>
+            <label asp-for="ResourceName" class="control-label"><</label>
+            <input asp-for="ResourceName" class="form-control" />
+            <span asp-validation-for="ResourceName" class="text-danger"></span>
+        </div>*@
+    @*<div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div>*@
+<h3>Fully Functional Form to Add Resources I Swear</h3>
+<form method="post" action ="/Resource/Create">
+    <div class="form-group py-2">
+        <label asp-for="ResourceName">Resource Name</label>
+        <input asp-for="ResourceName" class="form-control" required />
+    </div>
+ 
+    <div class="form-group py-2">
+        <label asp-for="ResourceType">Resource Type</label>
+       <select asp-for="ResourceType" class= "form-control">
+           <option value="Mental Wellness"> Mental Wellness</option>
+           <option value="Physical Wellness">Physical Wellness</option>
+       </select>
+    </div>
+    <div class="form-group py-2">
+        <label asp-for="Address"></label>
+        <textarea asp-for="Address" class="form-control"></textarea>
+    </div>
+    <div class="form-group py-2">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+
+    <div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+</form>
+
+
+
+
+
