@@ -12,5 +12,9 @@ namespace DisOrientedProgramming.Models
         public string Name { get; set; }
 
         public string Desc { get; set; }
+
+        //this is a very meh way of doing this
+        //using this numebr to keep the topics in order
+        public int OrderNumber { get; set; }
     }
 }
