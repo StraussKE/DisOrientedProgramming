@@ -82,3 +82,13 @@ body {
     text-decoration: none;
     color: black;
     }
+
+/*addes backgound gradint*/
+body {
+    background-image: linear-gradient(90deg, #45b3e0, #87ceeb, #c9e9f6);
+}
+
+/*makes textarea non movable*/
+.Fix-Size{
+    resize : none;
+}
