@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 using DisOrientedProgramming.Data;
 using DisOrientedProgramming.Models;
@@ -16,31 +17,45 @@ namespace DisOrientedProgramming.Controllers
     public class SurveyController : Controller
     {
 
-        ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
+        private UserManager<AppUser> _userManager;
+        
 
-        public SurveyController (ApplicationDbContext c)
+        public SurveyController (UserManager<AppUser> usrmgr, ApplicationDbContext context)
         {
-            context = c;
+            _context = context;
+            _userManager = usrmgr;
         }
 
-        
+        private Task<AppUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
         // GET: /<controller>/
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult TakeSurvey()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Index(SurveyModel model)
+        public async Task<IActionResult> TakeSurvey(SurveyModel model)
         {
-            context.SurveyModels.Add(model);
-            context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                var currentUser = await GetCurrentUserAsync();
+
+                model.SurveyModelId = new Guid();
+                model.User = currentUser;
+
+
+                _context.SurveyModels.Add(model);
+                await _context.SaveChangesAsync();
+            }
 
             int sumOfQ3Answers = 0;
             int sumOfQ4Answers = 0;
             int counter = 0;
 
-            List<SurveyModel> listOfModelObjects = context.SurveyModels.ToList();
+            List<SurveyModel> listOfModelObjects = await _context.SurveyModels.ToListAsync();
 
             foreach (var obj in listOfModelObjects)
             {
@@ -52,8 +67,8 @@ namespace DisOrientedProgramming.Controllers
             ViewBag.averageValOfQ3s = sumOfQ3Answers / counter;
             ViewBag.averageValOfQ4s = sumOfQ4Answers / counter;
 
-            context.SurveyModels.Update(model);
-            context.SaveChanges();
+            //context.SurveyModels.Update(model);   // removed by KS -> you didn't change the model after adding it above, no need to update
+            //context.SaveChanges();                // removed by KS -> no need to save changes that didn't happen
 
             return View(model);
 

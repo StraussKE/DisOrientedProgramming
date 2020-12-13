@@ -5,9 +5,7 @@ namespace DisOrientedProgramming.Models
     {
         public Guid     SurveyModelId   { get; set; }
 
-        // Currently not in use. Will be implemented when site is able to recognize user (currently
-        // logged in) who is filling out the survey. 
-        //public AppUser  User            { get; set; }
+        public AppUser  User            { get; set; }
 
         public string   Question1       { get; set; }
 
@@ -29,7 +27,6 @@ namespace DisOrientedProgramming.Models
         //public double   AverageValOfQ3s { get; set; }
 
         //public double   AverageValOfQ4s { get; set; }
-
 
 
     }//End Class 

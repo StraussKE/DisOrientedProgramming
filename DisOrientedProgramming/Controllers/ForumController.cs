@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 using DisOrientedProgramming.Data;
 using DisOrientedProgramming.Models;
@@ -16,31 +17,42 @@ namespace DisOrientedProgramming.Controllers
     public class ForumController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private UserManager<AppUser> _userManager;
 
-        public ForumController(ApplicationDbContext context)
+
+        public ForumController(UserManager<AppUser> usrmgr, ApplicationDbContext context)
         {
             _context = context;
+            _userManager = usrmgr;
         }
 
-        public IActionResult Index()
+        private Task<AppUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
+        public async Task<IActionResult> Index()
         {
-            ViewBag.Topics = _context.ForumTopics.OrderBy(t => t.OrderNumber).ToList();
+            ViewBag.Topics = await _context.ForumTopics.OrderBy(t => t.OrderNumber).ToListAsync();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Index(ForumPost usersPost)
+        public async Task<IActionResult> Index(ForumPost usersPost)
         {
-            ForumTopic topic = _context.ForumTopics.Where(f =>f.Name == usersPost.Topic.Name).FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+                ForumTopic topic = await _context.ForumTopics.Where(f => f.Name == usersPost.Topic.Name).FirstOrDefaultAsync();
+                var currentUser = await GetCurrentUserAsync();
 
-            usersPost.Topic = topic;
+                usersPost.User = currentUser;
+                usersPost.Topic = topic;
 
-            usersPost.TimePosted = DateTime.Now;
+                usersPost.TimePosted = DateTime.Now;
 
-            _context.ForumPosts.Add(usersPost);
-            _context.SaveChanges();
+                _context.ForumPosts.Add(usersPost);
+                await _context.SaveChangesAsync();
 
-            return RedirectToAction("Topic", new { t = usersPost.Topic.ForumTopicId, Area = "" });
+                return RedirectToAction("Topic", new { t = usersPost.Topic.ForumTopicId, Area = "" });
+            }
+            return View("usersPost");
 
         }
 

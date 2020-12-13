@@ -123,8 +123,8 @@ namespace DisOrientedProgramming
 
 
 				//Calls method from ApplicationDbContext.cs-creates Roles
-			//ApplicationDbContext.CreateRoles(app.ApplicationServices, Configuration).Wait();
-			//ApplicationDbContext.CreateAdminAccount(app.ApplicationServices, Configuration).Wait();
+			ApplicationDbContext.CreateRoles(app.ApplicationServices, Configuration).Wait();
+			ApplicationDbContext.CreateAdminAccount(app.ApplicationServices, Configuration).Wait();
 
 		}
 
