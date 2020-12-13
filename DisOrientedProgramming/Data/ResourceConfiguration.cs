@@ -29,7 +29,7 @@ namespace DisOrientedProgramming.Data
                     ResourceType = "Mental Wellness",
                     Address = new Uri("https://www.psychologytoday.com/us"),
                     Description = "24/7, free and confidential support for people in distress, prevention and crisis resources." +
-                    " This website can even help you find a therapist or support group."
+                    " This website can help you find a therapist or support group."
                 },
                 new ResourceLink
                 {
@@ -58,7 +58,7 @@ namespace DisOrientedProgramming.Data
                     ResourceType = "Physical Wellness",
                     Address = new Uri("https://www.lanecc.edu/dentalclinic"),
                     Description = "Provide the public with patient-centered, comprehensive, preventive and therapeutic dental care, while at the same time providing practical," +
-                    " educational experiences for dental hygiene and dental assisting students. \\*\\* Now accepting OHP"
+                    " educational experiences for dental hygiene and dental assisting students. Now accepting OHP"
                 },
                 new ResourceLink
                 {
