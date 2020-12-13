@@ -44,14 +44,16 @@ namespace DisOrientedProgramming.Controllers
 
         public IActionResult Topic(Guid t)
         {
-            ForumTopic topic = _context.ForumTopics.First(Topic => Topic.ForumTopicId == t);
+            ForumTopic topic =  _context.ForumTopics.First(Topic => Topic.ForumTopicId == t);
             ViewBag.Topic = topic.Name;
             ViewBag.Posts = _context.ForumPosts.Where(post => post.Topic == topic).ToList();
             return View();
         }
 
-
-        public async Task<IActionResult> ViewThread(Guid startPost) // thread head
+        //I do not know how to implement this
+        //will come back and learn async when time
+       
+        /* public async Task<IActionResult> ViewThread(Guid startPost) // thread head
         {
             // only the posts that go in this thread
             var postList = await _context.ForumPosts.Where(post => post.ParentPost.ForumPostId == startPost).ToListAsync();
@@ -60,6 +62,17 @@ namespace DisOrientedProgramming.Controllers
             // then display posts and lists like a tree/graph wee!!!
 
             return null;
+        }*/
+
+        public IActionResult ViewThread(Guid startPost)
+        {
+            ViewBag.TopPost = _context.ForumPosts.Where(p =>
+            p.ForumPostId == startPost).FirstOrDefault(); ;
+
+            ViewBag.PostList = _context.ForumPosts.Where(p =>
+            p.ParentPost.ForumPostId == startPost);
+
+            return View();
         }
     }
 }
