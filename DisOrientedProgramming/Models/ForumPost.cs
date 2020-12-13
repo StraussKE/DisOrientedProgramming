@@ -14,6 +14,8 @@ namespace DisOrientedProgramming.Models
 
         public string PostText { get; set; }
 
+        public DateTime TimePosted { get; set; }
+
         public virtual ForumTopic Topic { get; set; }
 
         //this is used to track if this post is in response to a diff forum post
