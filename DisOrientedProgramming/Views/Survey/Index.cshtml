@@ -71,23 +71,38 @@
         <div>
             @if(Model != null)
             {
-                <div id="Answers">
-                    <label>Suggestions for future additions:</label>
-                    <br />
-                    <p>@Model.Question1</p>
-                    <label>Things you like about our site as it is:</label>
-                    <br />
-                    <p>@Model.Question2</p>
-                    <label>Site rating:</label>
-                    <br />
-                    <p>@Model.Question3</p>
-                    <label>How recommendable this site is:</label>
-                    <br />
-                    <p>@Model.Question4</p>
-                    <label>Result of Q3 + Q4:</label>
-                    <br />
-                    <p></p>
-                </div>
+            <div id="Answers">
+                <label>Suggestions for future additions:</label>
+                <br />
+                <p>@Model.Question1</p>
+                <label>Things you like about our site as it is:</label>
+                <br />
+                <p>@Model.Question2</p>
+                <label>Site rating:</label>
+                <br />
+                <p>@Model.Question3</p>
+                <label>How recommendable this site is:</label>
+                <br />
+                <p>@Model.Question4</p>
+                <label>SumOfQ3Answers:</label>
+                <br />
+                <p>@Model.SumOfQ3Answers</p>
+                <label>SumOfQ4Answers:</label>
+                <br />
+                <p>@Model.SumOfQ4Answers</p>
+                <label>TotalNumOfQ3s:</label>
+                <br />
+                <p>@Model.TotalNumOfQ3s</p>
+                <label>TotalNumOfQ4s:</label>
+                <br />
+                <p>@Model.TotalNumOfQ4s</p>
+                <label>AverageValOfQ3s:</label>
+                <br />
+                <p>@Model.AverageValOfQ3s</p>
+                <label>AverageValOfQ4s:</label>
+                <br />
+                <p>@Model.AverageValOfQ4s</p>
+            </div>
             }
         </div>
     </div>

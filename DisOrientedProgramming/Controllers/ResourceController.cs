@@ -25,32 +25,34 @@ namespace DisOrientedProgramming.Controllers
         public async Task<IActionResult> Index()
         {
 
-            ViewBag.MentalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Mental Health").ToListAsync();
+            ViewBag.MentalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Mental Wellness").ToListAsync();
 
-            ViewBag.PhysicalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Physical Health").ToListAsync();
+            ViewBag.PhysicalHealth = await _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Physical Wellness").ToListAsync();
 
-
+            ViewBag.ResourceTypes =  _context.ResourceLinks.OrderBy(r => r.ResourceType).ThenBy(r => r.ResourceName).Where(r => r.ResourceType == "Physical Wellness").ToListAsync();
 
             return View();
         }
-        public async Task<IActionResult> Create(ResourceLink model)
+        public  IActionResult Create(ResourceLink model)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
 
-                ResourceLink resource = new ResourceLink
-                {
-                    ResourceLinkId = Guid.NewGuid(),
-                    ResourceName = model.ResourceName,
-                    ResourceType = model.ResourceType,
-                };
+                //    ResourceLink resource = new ResourceLink
+                //    {
+                //        ResourceLinkId = Guid.NewGuid(),
+                //        ResourceName = model.ResourceName,
+                //        ResourceType = model.ResourceType,
+                //    };
+                model.ResourceLinkId = Guid.NewGuid();
+                _context.ResourceLinks.Add(model);
+                _context.SaveChanges();
 
-                _context.Add(resource);
-                await _context.SaveChangesAsync().ConfigureAwait(true);
-                return RedirectToAction("Index", new { id = resource.ResourceLinkId });
-            }
+                //await _context.SaveChangesAsync().ConfigureAwait(true);
+                return RedirectToAction("Index", new { id = model.ResourceLinkId });
+            //}
 
-            return View();
+           // return View();
 
         }
     }
