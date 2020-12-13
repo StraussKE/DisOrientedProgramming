@@ -22,11 +22,12 @@
 
             @foreach (ResourceLink l in ViewBag.MentalHealth)
             {
-
+                <p class="Big-Home">
                 <tr>
                     <td><a href="@l.Address">@l.ResourceName</a></td>
                     <td>@l.Description</td>
                 </tr>
+                </p>
             }
 
 
@@ -47,15 +48,17 @@
             <tbody>
                 @foreach (ResourceLink l in ViewBag.PhysicalHealth)
                 {
-                    <!-- tr = table row -->
+                    <p class="Big-Home">
+                        <!-- tr = table row -->
                     <tr>
                         <!-- td = table cell what other info do you wnat to show?-->
                         <td><a href="@l.Address">@l.ResourceName</a></td>
                         <td>@l.Description</td>
                     </tr>
-                }
+                    </p>
+                    }
 
-            </tbody>
+                </tbody>
         </table>
 
     </div>
@@ -79,7 +82,7 @@
                 <a class="dropdown-item" href="#">Something else here</a>
             </div>
         </div>*@
-<h3>Fully Functional Form to Add Resources I Swear</h3>
+<h3>Client Form to Add Resources</h3>
 <form method="post" action ="/Resource/Create">
     <div class="form-group py-2">
         <label asp-for="ResourceName">Resource Name</label>
