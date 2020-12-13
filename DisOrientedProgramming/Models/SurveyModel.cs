@@ -11,9 +11,9 @@ namespace DisOrientedProgramming.Models
 
         public string Question2 { get; set; }
 
-        public string Question3 { get; set; }
+        public int Question3 { get; set; }
 
-        public string Question4 { get; set; }
+        public int Question4 { get; set; }
 
 
 

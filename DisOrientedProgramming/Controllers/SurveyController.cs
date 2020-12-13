@@ -15,10 +15,25 @@ namespace DisOrientedProgramming.Controllers
 {
     public class SurveyController : Controller
     {
+
+        ApplicationDbContext context;
+
+        public SurveyController (ApplicationDbContext c)
+        {
+            context = c;
+        }
+
+        
         // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(SurveyModel model)
+        {
+            return View(model);
         }
 
 
